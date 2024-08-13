@@ -81,3 +81,23 @@ function whatDayIsIt(dayNumber) {
     console.log("Today is ".concat(weekdaySwitch(dayNumber)));
 }
 whatDayIsIt(1);
+// loops
+function humanLoop() {
+    var humans = ['Viktor', 'timmy', 'ole', 'storm', 'jacob'];
+    for (var i = 0; i < humans.length; i++) {
+        console.log(humans[i]);
+    }
+}
+humanLoop();
+// function carLoop(): void {
+//   let cars: string[] = ['volvo', 'bmw', 'audi', 'mercedes', 'tesla'];
+//   for (let car of cars) {
+//     console.log(car);
+//   }
+// }
+// carLoop();
+function numberLoop() {
+    var numbers = [1, 5, 7, 9, 11, 13, 15];
+    numbers.forEach(function (num) { return console.log(num); });
+}
+numberLoop();

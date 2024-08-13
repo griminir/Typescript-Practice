@@ -93,3 +93,29 @@ function whatDayIsIt(dayNumber: number): void {
   console.log(`Today is ${weekdaySwitch(dayNumber)}`);
 }
 whatDayIsIt(1);
+
+// loops
+function humanLoop(): void {
+  let humans: string[] = ['Viktor', 'timmy', 'ole', 'storm', 'jacob'];
+
+  for (let i = 0; i < humans.length; i++) {
+    console.log(humans[i]);
+  }
+}
+humanLoop();
+
+// function carLoop(): void {
+//   let cars: string[] = ['volvo', 'bmw', 'audi', 'mercedes', 'tesla'];
+
+//   for (let car of cars) {
+//     console.log(car);
+//   }
+// }
+// carLoop();
+
+function numberLoop(): void {
+  let numbers: number[] = [1, 5, 7 , 9, 11, 13, 15];
+
+  numbers.forEach(num => console.log(num));
+}
+numberLoop();
