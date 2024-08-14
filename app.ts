@@ -139,4 +139,52 @@ const curriedAddThenMultiply = (a: number): CurriedAddThenMultiply => {
   }
 }
 const addTwoAndThreeThenMultiplyFour = curriedAddThenMultiply(2)(3)(4);
+const addFiveAndFour = curriedAddThenMultiply(5)(4);
+console.log(addFiveAndFour(10));
 console.log(addTwoAndThreeThenMultiplyFour);
+
+interface IPersonInfo {
+  name: string;
+  age: number;
+  isAlive: boolean;
+}
+
+const viktorRecord = ():IPersonInfo =>{
+  return {
+    name: "Viktor",
+    age: 29,
+    isAlive: true
+  }
+}
+// const viktor: IPersonInfo = {
+//   name: "Viktor",
+//   age: 29,
+//   isAlive: true
+// }
+
+type PersonalGrowth = (person: IPersonInfo) => IPersonInfo;
+const birthday: PersonalGrowth = (person) => {
+  return {
+    ...person,
+    age: person.age + 1
+  }
+};
+
+console.log(birthday(viktorRecord()));
+console.log(viktorRecord());
+
+const changeHonorific: PersonalGrowth = (person : IPersonInfo) =>{
+  return {
+    ...person,
+    name: `MR ${person.name}`
+  }
+}
+
+// array of functions
+const tenYearsOlder: PersonalGrowth[] = Array(10).fill(birthday);
+const earningMrTitle: PersonalGrowth[] = [...tenYearsOlder, changeHonorific];
+
+console.log(earningMrTitle.reduce((person, func) => func(person), viktorRecord()));
+console.log(viktorRecord());
+
+

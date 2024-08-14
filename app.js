@@ -1,3 +1,23 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 function helloFunction() {
     var message = 'Hello TypeScript!';
     console.log(message);
@@ -114,4 +134,26 @@ var curriedAddThenMultiply = function (a) {
     };
 };
 var addTwoAndThreeThenMultiplyFour = curriedAddThenMultiply(2)(3)(4);
+var addFiveAndFour = curriedAddThenMultiply(5)(4);
+console.log(addFiveAndFour(10));
 console.log(addTwoAndThreeThenMultiplyFour);
+var viktorRecord = function () {
+    return {
+        name: "Viktor",
+        age: 29,
+        isAlive: true
+    };
+};
+var birthday = function (person) {
+    return __assign(__assign({}, person), { age: person.age + 1 });
+};
+console.log(birthday(viktorRecord()));
+console.log(viktorRecord());
+var changeHonorific = function (person) {
+    return __assign(__assign({}, person), { name: "MR ".concat(person.name) });
+};
+// array of functions
+var tenYearsOlder = Array(10).fill(birthday);
+var earningMrTitle = __spreadArray(__spreadArray([], tenYearsOlder, true), [changeHonorific], false);
+console.log(earningMrTitle.reduce(function (person, func) { return func(person); }, viktorRecord()));
+console.log(viktorRecord());
