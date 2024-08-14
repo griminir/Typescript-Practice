@@ -119,3 +119,24 @@ function numberLoop(): void {
   numbers.forEach(num => console.log(num));
 }
 numberLoop();
+
+function specificType(answer: 'yes' | 'no'): void {
+  answer === 'yes' ? console.log('You said yes') : console.log('You said no');
+}
+
+specificType('yes');
+
+// funksjonell programmering med TypeScript - currying
+type CurriedAddThenMultiply = (b: number) => (c: number) => number;
+
+// const curriedAddThenMultiply = (a: number): CurriedAddThenMultiply => (b: number) => (c: number) => (a + b) * c;
+
+const curriedAddThenMultiply = (a: number): CurriedAddThenMultiply => {
+  return (b: number) => {
+    return (c: number) => {
+      return (a + b) * c;
+    }
+  }
+}
+const addTwoAndThreeThenMultiplyFour = curriedAddThenMultiply(2)(3)(4);
+console.log(addTwoAndThreeThenMultiplyFour);

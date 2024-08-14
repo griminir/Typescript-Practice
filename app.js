@@ -101,3 +101,17 @@ function numberLoop() {
     numbers.forEach(function (num) { return console.log(num); });
 }
 numberLoop();
+function specificType(answer) {
+    answer === 'yes' ? console.log('You said yes') : console.log('You said no');
+}
+specificType('yes');
+// const curriedAddThenMultiply = (a: number): CurriedAddThenMultiply => (b: number) => (c: number) => (a + b) * c;
+var curriedAddThenMultiply = function (a) {
+    return function (b) {
+        return function (c) {
+            return (a + b) * c;
+        };
+    };
+};
+var addTwoAndThreeThenMultiplyFour = curriedAddThenMultiply(2)(3)(4);
+console.log(addTwoAndThreeThenMultiplyFour);
