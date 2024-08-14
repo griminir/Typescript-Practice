@@ -67,7 +67,7 @@ function yourName(firstName: string, lastName: string): void {
 
   if (firstName === 'viktor' && lastName === 'degray') {
     console.log('Hello creator!');
-  } else if (firstName === 'viktor'|| lastName === 'degray') {
+  } else if (firstName === 'viktor' || lastName === 'degray') {
     console.log('Are you my creator?');
   } else {
     console.log('Hello Stranger!');
@@ -78,14 +78,22 @@ yourName('VIKTOR', 'degRAY');
 // switch statement break redundent because of return
 function weekdaySwitch(dayNumber: number): string {
   switch (dayNumber) {
-    case 0: return 'Monday';
-    case 1: return 'Tuesday';
-    case 2: return 'Wednesday';
-    case 3: return 'Thursday';
-    case 4: return 'Friday';
-    case 5: return 'Saturday';
-    case 6: return 'Sunday';
-    default: return 'Invalid day number';
+    case 0:
+      return 'Monday';
+    case 1:
+      return 'Tuesday';
+    case 2:
+      return 'Wednesday';
+    case 3:
+      return 'Thursday';
+    case 4:
+      return 'Friday';
+    case 5:
+      return 'Saturday';
+    case 6:
+      return 'Sunday';
+    default:
+      return 'Invalid day number';
   }
 }
 
@@ -114,9 +122,9 @@ humanLoop();
 // carLoop();
 
 function numberLoop(): void {
-  let numbers: number[] = [1, 5, 7 , 9, 11, 13, 15];
+  let numbers: number[] = [1, 5, 7, 9, 11, 13, 15];
 
-  numbers.forEach(num => console.log(num));
+  numbers.forEach((num) => console.log(num));
 }
 numberLoop();
 
@@ -135,9 +143,9 @@ const curriedAddThenMultiply = (a: number): CurriedAddThenMultiply => {
   return (b: number) => {
     return (c: number) => {
       return (a + b) * c;
-    }
-  }
-}
+    };
+  };
+};
 const addTwoAndThreeThenMultiplyFour = curriedAddThenMultiply(2)(3)(4);
 const addFiveAndFour = curriedAddThenMultiply(5)(4);
 console.log(addFiveAndFour(10));
@@ -149,42 +157,43 @@ interface IPersonInfo {
   isAlive: boolean;
 }
 
-const viktorRecord = ():IPersonInfo =>{
+const viktorRecord = (): IPersonInfo => {
   return {
-    name: "Viktor",
+    name: 'Viktor',
     age: 29,
-    isAlive: true
-  }
-}
+    isAlive: true,
+  };
+};
+
 // const viktor: IPersonInfo = {
 //   name: "Viktor",
 //   age: 29,
 //   isAlive: true
-// }
+// };
 
 type PersonalGrowth = (person: IPersonInfo) => IPersonInfo;
 const birthday: PersonalGrowth = (person) => {
   return {
     ...person,
-    age: person.age + 1
-  }
+    age: person.age + 1,
+  };
 };
 
 console.log(birthday(viktorRecord()));
 console.log(viktorRecord());
 
-const changeHonorific: PersonalGrowth = (person : IPersonInfo) =>{
+const changeHonorific: PersonalGrowth = (person: IPersonInfo) => {
   return {
     ...person,
-    name: `MR ${person.name}`
-  }
-}
+    name: `MR ${person.name}`,
+  };
+};
 
 // array of functions
 const tenYearsOlder: PersonalGrowth[] = Array(10).fill(birthday);
 const earningMrTitle: PersonalGrowth[] = [...tenYearsOlder, changeHonorific];
 
-console.log(earningMrTitle.reduce((person, func) => func(person), viktorRecord()));
+console.log(
+  earningMrTitle.reduce((person, func) => func(person), viktorRecord())
+);
 console.log(viktorRecord());
-
-

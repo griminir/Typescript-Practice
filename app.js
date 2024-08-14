@@ -87,14 +87,22 @@ yourName('VIKTOR', 'degRAY');
 // switch statement break redundent because of return
 function weekdaySwitch(dayNumber) {
     switch (dayNumber) {
-        case 0: return 'Monday';
-        case 1: return 'Tuesday';
-        case 2: return 'Wednesday';
-        case 3: return 'Thursday';
-        case 4: return 'Friday';
-        case 5: return 'Saturday';
-        case 6: return 'Sunday';
-        default: return 'Invalid day number';
+        case 0:
+            return 'Monday';
+        case 1:
+            return 'Tuesday';
+        case 2:
+            return 'Wednesday';
+        case 3:
+            return 'Thursday';
+        case 4:
+            return 'Friday';
+        case 5:
+            return 'Saturday';
+        case 6:
+            return 'Sunday';
+        default:
+            return 'Invalid day number';
     }
 }
 function whatDayIsIt(dayNumber) {
@@ -139,9 +147,9 @@ console.log(addFiveAndFour(10));
 console.log(addTwoAndThreeThenMultiplyFour);
 var viktorRecord = function () {
     return {
-        name: "Viktor",
+        name: 'Viktor',
         age: 29,
-        isAlive: true
+        isAlive: true,
     };
 };
 var birthday = function (person) {
