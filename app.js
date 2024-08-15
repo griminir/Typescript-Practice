@@ -224,6 +224,7 @@ var addListOfNumbersToATotal = function () {
 // testing for same outcome
 console.log(addListOfNumbersToATotal(1, 2, 3, 4, 5));
 console.log(addListOfNumbersToATotal(2, 1, 4, 5, 3));
+// typeof typeguard
 var processInput = function (input) {
     return typeof input === "number" ? (input * 2) : input.toUpperCase();
 };

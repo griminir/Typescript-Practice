@@ -300,7 +300,7 @@ const processInput = (input: string | number): string | number => {
   return typeof input === "number" ? (input * 2) : input.toUpperCase();
 }
 console.log(processInput('timmy'));
-console.log(32);
+console.log(processInput(32));
 
 
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.
