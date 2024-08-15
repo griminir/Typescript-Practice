@@ -41,12 +41,13 @@ function printTypescriptTypes() {
 }
 printTypescriptTypes();
 // mvc template
-function printH1() {
-    var div = document.getElementById('app');
-    var html = /*html*/ "<h1>Hello TypeScript!</h1>\n  <p>It's a great day to learn something new.</p>";
-    div !== null ? (div.innerHTML = html) : null;
-}
-printH1();
+// function printH1(): void {
+//   let div: HTMLElement | null = document.getElementById('app');
+//   let html: string = /*html*/ `<h1>Hello TypeScript!</h1>
+//   <p>It's a great day to learn something new.</p>`;
+//   div !== null ? (div.innerHTML = html) : null;
+// }
+// printH1();
 // use of date
 function myBirthday() {
     var birthday = new Date(1994, 10, 2);
@@ -163,5 +164,47 @@ var changeHonorific = function (person) {
 // array of functions
 var tenYearsOlder = Array(10).fill(birthday);
 var earningMrTitle = __spreadArray(__spreadArray([], tenYearsOlder, true), [changeHonorific], false);
-console.log(earningMrTitle.reduce(function (person, func) { return func(person); }, viktorRecord()));
+var mrViktor10YearsLater = earningMrTitle.reduce(function (person, func) { return func(person); }, viktorRecord());
+console.log(mrViktor10YearsLater);
 console.log(viktorRecord());
+var evilBoss = {
+    name: 'Evil Boss',
+    hp: 100,
+    damage: 10,
+    isAlive: true,
+};
+//type guard (mvc template project)
+var isPersonInfo = function (data) {
+    return data.age !== undefined;
+};
+// check working type guard (mvc template project)
+console.log(isPersonInfo(evilBoss));
+console.log(isPersonInfo(mrViktor10YearsLater));
+var generateHtml = function (data) {
+    return isPersonInfo(data)
+        ? /*html*/ "\n    <div>\n      <h1>".concat(data.name, "</h1>\n      <p>").concat(data.age, "</p>\n      <p>").concat(data.isAlive ? 'Alive' : 'Dead', "</p>\n      <button id=\"swapBossButton\">Change data</button>\n    </div>\n  ")
+        : /*html*/ "\n    <div>\n      <h1>".concat(data.name, "</h1>\n      <p>").concat(data.hp, "</p>\n      <p>").concat(data.damage, "</p>\n      <p>").concat(data.isAlive ? 'Alive' : 'Dead', "</p>\n      <button id=\"swapHumanButton\">Change data</button>\n    </div>\n    ");
+};
+// update view (mvc template project)
+var updateView = function (element, html) {
+    element !== null ? (element.innerHTML = html) : null;
+};
+// generating human side of code(mvc template project)
+// put into a function to not run it immediately
+function runHumanView() {
+    var humanInfo = updateView(document.getElementById('app'), generateHtml(mrViktor10YearsLater));
+}
+// generating boss side of code(mvc template project)
+// put into a function to not run it immediately
+function runBossView() {
+    var bossInfo = updateView(document.getElementById('app'), generateHtml(evilBoss));
+}
+var attachButtonListener = function (id, func) {
+    if (id !== null) {
+        id.addEventListener('click', func);
+    }
+};
+attachButtonListener(document.getElementById('swapBossButton'), runBossView());
+attachButtonListener(document.getElementById('swapHumanButton'), runHumanView());
+runHumanView();
+// Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.

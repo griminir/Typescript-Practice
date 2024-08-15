@@ -24,13 +24,13 @@ function printTypescriptTypes(): void {
 printTypescriptTypes();
 
 // mvc template
-function printH1(): void {
-  let div: HTMLElement | null = document.getElementById('app');
-  let html: string = /*html*/ `<h1>Hello TypeScript!</h1>
-  <p>It's a great day to learn something new.</p>`;
-  div !== null ? (div.innerHTML = html) : null;
-}
-printH1();
+// function printH1(): void {
+//   let div: HTMLElement | null = document.getElementById('app');
+//   let html: string = /*html*/ `<h1>Hello TypeScript!</h1>
+//   <p>It's a great day to learn something new.</p>`;
+//   div !== null ? (div.innerHTML = html) : null;
+// }
+// printH1();
 
 // use of date
 function myBirthday(): void {
@@ -182,7 +182,7 @@ const birthday: PersonalGrowth = (person) => {
 console.log(birthday(viktorRecord()));
 console.log(viktorRecord());
 
-const changeHonorific: PersonalGrowth = (person: IPersonInfo) => {
+const changeHonorific: PersonalGrowth = (person) => {
   return {
     ...person,
     name: `MR ${person.name}`,
@@ -193,7 +193,84 @@ const changeHonorific: PersonalGrowth = (person: IPersonInfo) => {
 const tenYearsOlder: PersonalGrowth[] = Array(10).fill(birthday);
 const earningMrTitle: PersonalGrowth[] = [...tenYearsOlder, changeHonorific];
 
-console.log(
-  earningMrTitle.reduce((person, func) => func(person), viktorRecord())
+const mrViktor10YearsLater = earningMrTitle.reduce(
+  (person, func) => func(person),
+  viktorRecord()
 );
+console.log(mrViktor10YearsLater);
+
 console.log(viktorRecord());
+
+// mvc template functional programming
+interface IBoss {
+  name: string;
+  hp: number;
+  damage: number;
+  isAlive: boolean;
+}
+
+const evilBoss: IBoss = {
+  name: 'Evil Boss',
+  hp: 100,
+  damage: 10,
+  isAlive: true,
+};
+
+//type guard (mvc template project)
+const isPersonInfo = (data: any): data is IPersonInfo => {
+  return (data as IPersonInfo).age !== undefined;
+};
+// check working type guard (mvc template project)
+console.log(isPersonInfo(evilBoss));
+console.log(isPersonInfo(mrViktor10YearsLater));
+
+//type and function for generating html (mvc template project)
+type DataHtmlGenerator = (data: IPersonInfo | IBoss) => string;
+const generateHtml: DataHtmlGenerator = (data) => {
+  return isPersonInfo(data)
+    ? /*html*/ `
+    <div>
+      <h1>${data.name}</h1>
+      <p>${data.age}</p>
+      <p>${data.isAlive ? 'Alive' : 'Dead'}</p>
+      <button id="swapBossButton">Change data</button>
+    </div>
+  `
+    : /*html*/ `
+    <div>
+      <h1>${data.name}</h1>
+      <p>${data.hp}</p>
+      <p>${data.damage}</p>
+      <p>${data.isAlive ? 'Alive' : 'Dead'}</p>
+      <button id="swapHumanButton">Change data</button>
+    </div>
+    `;
+};
+
+// update view (mvc template project)
+const updateView = (element: HTMLElement | null, html: string): void => {
+  element !== null ? (element.innerHTML = html) : null;
+};
+
+// generating human side of code(mvc template project)
+// put into a function to not run it immediately
+function runHumanView() {
+  const humanInfo = updateView(
+    document.getElementById('app'),
+    generateHtml(mrViktor10YearsLater)
+  );
+}
+
+// generating boss side of code(mvc template project)
+// put into a function to not run it immediately
+function runBossView() {
+  const bossInfo = updateView(
+    document.getElementById('app'),
+    generateHtml(evilBoss)
+  );
+}
+
+runHumanView();
+
+
+// Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.
