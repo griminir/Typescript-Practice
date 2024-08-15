@@ -273,4 +273,21 @@ function runBossView() {
 runHumanView();
 
 
+// some ways to not provide all params in typescript
+const calculateScore = (score: number, peneltyPoints?: number): number => {
+  return score - (peneltyPoints || 0) 
+};
+
+console.log(calculateScore(500));
+console.log(calculateScore(500, 400));
+
+const calculateScore2 = (score: number, peneltyPoints: number = 0): number => score - peneltyPoints; 
+
+console.log(calculateScore2(500));
+console.log(calculateScore2(500, 400));
+
+
+
+
+
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.

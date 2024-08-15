@@ -199,12 +199,17 @@ function runHumanView() {
 function runBossView() {
     var bossInfo = updateView(document.getElementById('app'), generateHtml(evilBoss));
 }
-var attachButtonListener = function (id, func) {
-    if (id !== null) {
-        id.addEventListener('click', func);
-    }
-};
-attachButtonListener(document.getElementById('swapBossButton'), runBossView());
-attachButtonListener(document.getElementById('swapHumanButton'), runHumanView());
 runHumanView();
+// some ways to not provide all params in typescript
+var calculateScore = function (score, peneltyPoints) {
+    return score - (peneltyPoints || 0);
+};
+console.log(calculateScore(500));
+console.log(calculateScore(500, 400));
+var calculateScore2 = function (score, peneltyPoints) {
+    if (peneltyPoints === void 0) { peneltyPoints = 0; }
+    return score - peneltyPoints;
+};
+console.log(calculateScore2(500));
+console.log(calculateScore2(500, 400));
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.
