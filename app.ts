@@ -272,22 +272,27 @@ function runBossView() {
 
 runHumanView();
 
-
 // some ways to not provide all params in typescript
 const calculateScore = (score: number, peneltyPoints?: number): number => {
-  return score - (peneltyPoints || 0) 
+  return score - (peneltyPoints || 0);
 };
 
 console.log(calculateScore(500));
 console.log(calculateScore(500, 400));
 
-const calculateScore2 = (score: number, peneltyPoints: number = 0): number => score - peneltyPoints; 
+const calculateScore2 = (score: number, peneltyPoints: number = 0): number =>
+  score - peneltyPoints;
 
 console.log(calculateScore2(500));
 console.log(calculateScore2(500, 400));
 
-
-
-
+// how to make a list of params
+const addListOfNumbersToATotal = (...numlist: number[]): number => {
+  const total = numlist.reduce((sum, current) => sum + current, 0);
+  return total;
+};
+// testing for same outcome
+console.log(addListOfNumbersToATotal(1, 2, 3, 4, 5));
+console.log(addListOfNumbersToATotal(2, 1, 4, 5, 3));
 
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.
