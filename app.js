@@ -212,6 +212,7 @@ var calculateScore2 = function (score, peneltyPoints) {
 };
 console.log(calculateScore2(500));
 console.log(calculateScore2(500, 400));
+// how to make a list of params
 var addListOfNumbersToATotal = function () {
     var numlist = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -220,6 +221,12 @@ var addListOfNumbersToATotal = function () {
     var total = numlist.reduce(function (sum, current) { return sum + current; }, 0);
     return total;
 };
+// testing for same outcome
 console.log(addListOfNumbersToATotal(1, 2, 3, 4, 5));
 console.log(addListOfNumbersToATotal(2, 1, 4, 5, 3));
+var processInput = function (input) {
+    return typeof input === "number" ? (input * 2) : input.toUpperCase();
+};
+console.log(processInput('timmy'));
+console.log(processInput(32));
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.

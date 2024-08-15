@@ -295,4 +295,12 @@ const addListOfNumbersToATotal = (...numlist: number[]): number => {
 console.log(addListOfNumbersToATotal(1, 2, 3, 4, 5));
 console.log(addListOfNumbersToATotal(2, 1, 4, 5, 3));
 
+// typeof typeguard
+const processInput = (input: string | number): string | number => {
+  return typeof input === "number" ? (input * 2) : input.toUpperCase();
+}
+console.log(processInput('timmy'));
+console.log(32);
+
+
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.
