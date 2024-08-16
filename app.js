@@ -230,4 +230,17 @@ var processInput = function (input) {
 };
 console.log(processInput('timmy'));
 console.log(processInput(32));
+// challange to learn typescript
+function processData(input, config) {
+    if (config === void 0) { config = { reverse: false }; }
+    if (typeof input === 'number') {
+        return input * input;
+    }
+    else
+        return config.reverse ? input.toUpperCase().split('').reverse().join('') : input.toUpperCase();
+}
+;
+console.log(processData(10));
+console.log(processData('hello'));
+console.log(processData('hello', { reverse: true }));
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.
