@@ -248,14 +248,15 @@ const generateHtml: DataHtmlGenerator = (data) => {
 };
 
 // update view (mvc template project)
-const updateView = (element: HTMLElement | null, html: string): void => {
+type CreateView = (element: HTMLElement | null, html: string) => void;
+const updateView:CreateView = (element, html)=> {
   element !== null ? (element.innerHTML = html) : null;
 };
 
 // generating human side of code(mvc template project)
 // put into a function to not run it immediately
 function runHumanView() {
-  const humanInfo = updateView(
+  updateView(
     document.getElementById('app'),
     generateHtml(mrViktor10YearsLater)
   );
@@ -264,13 +265,28 @@ function runHumanView() {
 // generating boss side of code(mvc template project)
 // put into a function to not run it immediately
 function runBossView() {
-  const bossInfo = updateView(
-    document.getElementById('app'),
-    generateHtml(evilBoss)
-  );
+  updateView(document.getElementById('app'), generateHtml(evilBoss));
 }
 
 runHumanView();
+
+//event delegation for (mvc template project)
+function addGlobalEventListner(type: string, selector:string, func: (event: Event) => void): void {
+  document.addEventListener(type, (event) => {
+    const target = event.target as HTMLElement;
+    if (target.matches(selector)){
+      func(event)
+    }
+  });
+}
+
+const addButtonOnclick = (): void => {
+  addGlobalEventListner('click', '#swapBossButton', runBossView)
+  addGlobalEventListner('click', '#swapHumanButton', runHumanView)
+}
+addButtonOnclick();
+
+
 
 // some ways to not provide all params in typescript
 const calculateScore = (score: number, peneltyPoints?: number): number => {
@@ -297,37 +313,39 @@ console.log(addListOfNumbersToATotal(2, 1, 4, 5, 3));
 
 // typeof typeguard
 const processInput = (input: string | number): string | number => {
-  return typeof input === "number" ? (input * 2) : input.toUpperCase();
-}
+  return typeof input === 'number' ? input * 2 : input.toUpperCase();
+};
 console.log(processInput('timmy'));
 console.log(processInput(32));
 
-
 // challange using object.protperty as param
-function processData (input: string | number, config: {reverse:boolean} = {reverse: false}): string | number 
-{
-  if (typeof input === 'number'){
-    return input * input
-  } else return config.reverse ? input.toUpperCase().split('').reverse().join('') : input.toUpperCase();
-};
+function processData(
+  input: string | number,
+  config: { reverse: boolean } = { reverse: false }
+): string | number {
+  if (typeof input === 'number') {
+    return input * input;
+  } else
+    return config.reverse
+      ? input.toUpperCase().split('').reverse().join('')
+      : input.toUpperCase();
+}
 
 console.log(processData(10));
 console.log(processData('hello'));
-console.log(processData('hello', {reverse: true}));
+console.log(processData('hello', { reverse: true }));
 
 //challenge aliases and interfaces
 interface IEmployee {
-  id: number,
-  name: string,
-  department: string
-};
+  id: number;
+  name: string;
+  department: string;
+}
 interface IManager {
-  id: number,
-  name: string,
-  employees: IEmployee[]
-};
+  id: number;
+  name: string;
+  employees: IEmployee[];
+}
 type staff = IEmployee | IManager;
-
-
 
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.

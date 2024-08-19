@@ -185,21 +185,34 @@ var generateHtml = function (data) {
         ? /*html*/ "\n    <div>\n      <h1>".concat(data.name, "</h1>\n      <p>").concat(data.age, "</p>\n      <p>").concat(data.isAlive ? 'Alive' : 'Dead', "</p>\n      <button id=\"swapBossButton\">Change data</button>\n    </div>\n  ")
         : /*html*/ "\n    <div>\n      <h1>".concat(data.name, "</h1>\n      <p>").concat(data.hp, "</p>\n      <p>").concat(data.damage, "</p>\n      <p>").concat(data.isAlive ? 'Alive' : 'Dead', "</p>\n      <button id=\"swapHumanButton\">Change data</button>\n    </div>\n    ");
 };
-// update view (mvc template project)
 var updateView = function (element, html) {
     element !== null ? (element.innerHTML = html) : null;
 };
 // generating human side of code(mvc template project)
 // put into a function to not run it immediately
 function runHumanView() {
-    var humanInfo = updateView(document.getElementById('app'), generateHtml(mrViktor10YearsLater));
+    updateView(document.getElementById('app'), generateHtml(mrViktor10YearsLater));
 }
 // generating boss side of code(mvc template project)
 // put into a function to not run it immediately
 function runBossView() {
-    var bossInfo = updateView(document.getElementById('app'), generateHtml(evilBoss));
+    updateView(document.getElementById('app'), generateHtml(evilBoss));
 }
 runHumanView();
+//event delegation for (mvc template project)
+function addGlobalEventListner(type, selector, func) {
+    document.addEventListener(type, function (event) {
+        var target = event.target;
+        if (target.matches(selector)) {
+            func(event);
+        }
+    });
+}
+var addButtonOnclick = function () {
+    addGlobalEventListner('click', '#swapBossButton', runBossView);
+    addGlobalEventListner('click', '#swapHumanButton', runHumanView);
+};
+addButtonOnclick();
 // some ways to not provide all params in typescript
 var calculateScore = function (score, peneltyPoints) {
     return score - (peneltyPoints || 0);
@@ -226,20 +239,21 @@ console.log(addListOfNumbersToATotal(1, 2, 3, 4, 5));
 console.log(addListOfNumbersToATotal(2, 1, 4, 5, 3));
 // typeof typeguard
 var processInput = function (input) {
-    return typeof input === "number" ? (input * 2) : input.toUpperCase();
+    return typeof input === 'number' ? input * 2 : input.toUpperCase();
 };
 console.log(processInput('timmy'));
 console.log(processInput(32));
-// challange to learn typescript
+// challange using object.protperty as param
 function processData(input, config) {
     if (config === void 0) { config = { reverse: false }; }
     if (typeof input === 'number') {
         return input * input;
     }
     else
-        return config.reverse ? input.toUpperCase().split('').reverse().join('') : input.toUpperCase();
+        return config.reverse
+            ? input.toUpperCase().split('').reverse().join('')
+            : input.toUpperCase();
 }
-;
 console.log(processData(10));
 console.log(processData('hello'));
 console.log(processData('hello', { reverse: true }));
