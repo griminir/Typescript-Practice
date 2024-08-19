@@ -182,17 +182,17 @@ console.log(isPersonInfo(evilBoss));
 console.log(isPersonInfo(mrViktor10YearsLater));
 var generateHtml = function (data) {
     return isPersonInfo(data)
-        ? /*html*/ "\n    <div>\n      <h1>".concat(data.name, "</h1>\n      <p>").concat(data.age, "</p>\n      <p>").concat(data.isAlive ? 'Alive' : 'Dead', "</p>\n      <button id=\"swapBossButton\">Change data</button>\n    </div>\n  ")
-        : /*html*/ "\n    <div>\n      <h1>".concat(data.name, "</h1>\n      <p>").concat(data.hp, "</p>\n      <p>").concat(data.damage, "</p>\n      <p>").concat(data.isAlive ? 'Alive' : 'Dead', "</p>\n      <button id=\"swapHumanButton\">Change data</button>\n    </div>\n    ");
+        ? /*html*/ "\n    <div>\n      <h1>".concat(data.name, "</h1>\n      <p>Age :").concat(data.age, "</p>\n      <p>status :").concat(data.isAlive ? 'Alive' : 'Dead', "</p>\n      <button id=\"swapBossButton\">Change data</button>\n    </div>\n  ")
+        : /*html*/ "\n    <div>\n      <h1>".concat(data.name, "</h1>\n      <p>HP :").concat(data.hp, "</p>\n      <p>str :").concat(data.damage, "</p>\n      <p>status :").concat(data.isAlive ? 'Alive' : 'Dead', "</p>\n      <button id=\"swapHumanButton\">Change data</button>\n    </div>\n    ");
 };
 var updateView = function (element, html) {
     element !== null ? (element.innerHTML = html) : null;
 };
 // generating human side of code(mvc template project)
-// put into a function to not run it immediately
+// added a wait funtion (usikker på hva det heter egentlig)
 var runHumanView = function () { return updateView(document.getElementById('app'), generateHtml(mrViktor10YearsLater)); };
 // generating boss side of code(mvc template project)
-// put into a function to not run it immediately
+// added a wait funtion (usikker på hva det heter egentlig)
 var runBossView = function () { return updateView(document.getElementById('app'), generateHtml(evilBoss)); };
 runHumanView();
 //event delegation for (mvc template project)
@@ -253,4 +253,18 @@ function processData(input, config) {
 console.log(processData(10));
 console.log(processData('hello'));
 console.log(processData('hello', { reverse: true }));
+var alice = { id: 1, name: 'alice', department: 'sales' };
+var steve = { id: 1, name: 'steve', department: 'HR' };
+var timmy = { id: 1, name: 'timmy', employees: [alice, steve] };
+var printStaffDetails = function (staff) {
+    if ('employees' in staff) {
+        return "".concat(staff.name, " is a manager with ").concat(staff.employees.length, " employees");
+    }
+    else {
+        return "".concat(staff.name, " is an employee in the ").concat(staff.department, " department");
+    }
+};
+//checking for expected results
+console.log(printStaffDetails(alice));
+console.log(printStaffDetails(timmy));
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.

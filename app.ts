@@ -231,17 +231,17 @@ const generateHtml: DataHtmlGenerator = (data) => {
     ? /*html*/ `
     <div>
       <h1>${data.name}</h1>
-      <p>${data.age}</p>
-      <p>${data.isAlive ? 'Alive' : 'Dead'}</p>
+      <p>Age :${data.age}</p>
+      <p>status :${data.isAlive ? 'Alive' : 'Dead'}</p>
       <button id="swapBossButton">Change data</button>
     </div>
   `
     : /*html*/ `
     <div>
       <h1>${data.name}</h1>
-      <p>${data.hp}</p>
-      <p>${data.damage}</p>
-      <p>${data.isAlive ? 'Alive' : 'Dead'}</p>
+      <p>HP :${data.hp}</p>
+      <p>str :${data.damage}</p>
+      <p>status :${data.isAlive ? 'Alive' : 'Dead'}</p>
       <button id="swapHumanButton">Change data</button>
     </div>
     `;
@@ -279,7 +279,6 @@ const addButtonOnclick = (): void => {
   addGlobalEventListner('click', '#swapHumanButton', runHumanView)
 }
 addButtonOnclick();
-
 
 
 // some ways to not provide all params in typescript
@@ -340,6 +339,25 @@ interface IManager {
   name: string;
   employees: IEmployee[];
 }
-type staff = IEmployee | IManager;
+type Staff = IEmployee | IManager;
+
+const alice: IEmployee = {id: 1, name: 'alice', department: 'sales'};
+const steve: IEmployee = {id: 1, name: 'steve', department: 'HR'};
+
+const timmy: IManager = {id: 1, name: 'timmy', employees:[alice, steve]}
+
+const printStaffDetails = (staff: Staff): string => {
+  if ('employees' in staff){
+    return `${staff.name} is a manager with ${staff.employees.length} employees`;
+  } else{
+    return `${staff.name} is an employee in the ${staff.department} department`;
+  }
+}
+
+//checking for expected results
+console.log(printStaffDetails(alice));
+console.log(printStaffDetails(timmy));
+
+
 
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.
