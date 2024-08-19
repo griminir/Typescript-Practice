@@ -190,14 +190,10 @@ var updateView = function (element, html) {
 };
 // generating human side of code(mvc template project)
 // put into a function to not run it immediately
-function runHumanView() {
-    updateView(document.getElementById('app'), generateHtml(mrViktor10YearsLater));
-}
+var runHumanView = function () { return updateView(document.getElementById('app'), generateHtml(mrViktor10YearsLater)); };
 // generating boss side of code(mvc template project)
 // put into a function to not run it immediately
-function runBossView() {
-    updateView(document.getElementById('app'), generateHtml(evilBoss));
-}
+var runBossView = function () { return updateView(document.getElementById('app'), generateHtml(evilBoss)); };
 runHumanView();
 //event delegation for (mvc template project)
 function addGlobalEventListner(type, selector, func) {

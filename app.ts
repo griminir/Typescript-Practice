@@ -254,19 +254,13 @@ const updateView:CreateView = (element, html)=> {
 };
 
 // generating human side of code(mvc template project)
-// put into a function to not run it immediately
-function runHumanView() {
-  updateView(
-    document.getElementById('app'),
-    generateHtml(mrViktor10YearsLater)
-  );
-}
+// added a wait funtion (usikker på hva det heter egentlig)
+const runHumanView = (): void => updateView(document.getElementById('app'),generateHtml(mrViktor10YearsLater));
 
 // generating boss side of code(mvc template project)
-// put into a function to not run it immediately
-function runBossView() {
-  updateView(document.getElementById('app'), generateHtml(evilBoss));
-}
+// added a wait funtion (usikker på hva det heter egentlig)
+const runBossView = ():void => updateView(document.getElementById('app'), generateHtml(evilBoss));
+
 
 runHumanView();
 
