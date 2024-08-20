@@ -249,37 +249,44 @@ const generateHtml: DataHtmlGenerator = (data) => {
 
 // update view (mvc template project)
 type CreateView = (element: HTMLElement | null, html: string) => void;
-const updateView:CreateView = (element, html)=> {
+const updateView: CreateView = (element, html) => {
   element !== null ? (element.innerHTML = html) : null;
 };
 
 // generating human side of code(mvc template project)
 // added a wait funtion (usikker på hva det heter egentlig)
-const runHumanView = (): void => updateView(document.getElementById('app'),generateHtml(mrViktor10YearsLater));
+const runHumanView = (): void =>
+  updateView(
+    document.getElementById('app'),
+    generateHtml(mrViktor10YearsLater)
+  );
 
 // generating boss side of code(mvc template project)
 // added a wait funtion (usikker på hva det heter egentlig)
-const runBossView = ():void => updateView(document.getElementById('app'), generateHtml(evilBoss));
-
+const runBossView = (): void =>
+  updateView(document.getElementById('app'), generateHtml(evilBoss));
 
 runHumanView();
 
 //event delegation for (mvc template project)
-function addGlobalEventListner(type: string, selector:string, func: (event: Event) => void): void {
+function addGlobalEventListner(
+  type: string,
+  selector: string,
+  func: (event: Event) => void
+): void {
   document.addEventListener(type, (event) => {
     const target = event.target as HTMLElement;
-    if (target.matches(selector)){
-      func(event)
+    if (target.matches(selector)) {
+      func(event);
     }
   });
 }
 
 const addButtonOnclick = (): void => {
-  addGlobalEventListner('click', '#swapBossButton', runBossView)
-  addGlobalEventListner('click', '#swapHumanButton', runHumanView)
-}
+  addGlobalEventListner('click', '#swapBossButton', runBossView);
+  addGlobalEventListner('click', '#swapHumanButton', runHumanView);
+};
 addButtonOnclick();
-
 
 // some ways to not provide all params in typescript
 const calculateScore = (score: number, peneltyPoints?: number): number => {
@@ -341,22 +348,71 @@ interface IManager {
 }
 type Staff = IEmployee | IManager;
 
-const alice: IEmployee = {id: 1, name: 'alice', department: 'sales'};
-const steve: IEmployee = {id: 1, name: 'steve', department: 'HR'};
+const alice: IEmployee = { id: 1, name: 'alice', department: 'sales' };
+const steve: IEmployee = { id: 1, name: 'steve', department: 'HR' };
 
-const timmy: IManager = {id: 1, name: 'timmy', employees:[alice, steve]}
+const timmy: IManager = { id: 1, name: 'timmy', employees: [alice, steve] };
 
 const printStaffDetails = (staff: Staff): string => {
-  if ('employees' in staff){
+  if ('employees' in staff) {
     return `${staff.name} is a manager with ${staff.employees.length} employees`;
-  } else{
+  } else {
     return `${staff.name} is an employee in the ${staff.department} department`;
   }
-}
+};
 
 //checking for expected results
 console.log(printStaffDetails(alice));
 console.log(printStaffDetails(timmy));
+
+//tuples
+const person: [string, number] = ['oliver', 24];
+const date: readonly [number, number, number] = [20, 8, 2024];
+const susan: [string, number?] = ['susan'];
+
+//Enums
+enum ServerResponseStatus {
+  Success = 200,
+  Error = 'error',
+}
+
+interface ServerResponse {
+  result: ServerResponseStatus;
+  data: string[];
+}
+
+const getServerResponse = (): ServerResponse => {
+  return {
+    result: ServerResponseStatus.Success,
+    data: ['first item', 'second item'],
+  };
+};
+
+const response: ServerResponse = getServerResponse();
+console.log(response);
+
+// enum/tuple challenge
+enum UserRole {
+  Admin,
+  Manager,
+  employee,
+}
+
+type User = {
+  Id: number,
+  name: string,
+  role: UserRole,
+  Contact: [string, string]
+}
+
+function createUser(user: User): User {
+  return user;
+}
+
+const kimmy = createUser({Id: 32, name: 'kimmy', role: UserRole.Admin, Contact: ['me@gmail.com', '40400404']});
+
+//checking for right values
+console.log(kimmy);
 
 
 

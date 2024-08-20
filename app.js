@@ -190,10 +190,14 @@ var updateView = function (element, html) {
 };
 // generating human side of code(mvc template project)
 // added a wait funtion (usikker på hva det heter egentlig)
-var runHumanView = function () { return updateView(document.getElementById('app'), generateHtml(mrViktor10YearsLater)); };
+var runHumanView = function () {
+    return updateView(document.getElementById('app'), generateHtml(mrViktor10YearsLater));
+};
 // generating boss side of code(mvc template project)
 // added a wait funtion (usikker på hva det heter egentlig)
-var runBossView = function () { return updateView(document.getElementById('app'), generateHtml(evilBoss)); };
+var runBossView = function () {
+    return updateView(document.getElementById('app'), generateHtml(evilBoss));
+};
 runHumanView();
 //event delegation for (mvc template project)
 function addGlobalEventListner(type, selector, func) {
@@ -267,4 +271,35 @@ var printStaffDetails = function (staff) {
 //checking for expected results
 console.log(printStaffDetails(alice));
 console.log(printStaffDetails(timmy));
+//tuples
+var person = ['oliver', 24];
+var date = [20, 8, 2024];
+var susan = ['susan'];
+//Enums
+var ServerResponseStatus;
+(function (ServerResponseStatus) {
+    ServerResponseStatus[ServerResponseStatus["Success"] = 200] = "Success";
+    ServerResponseStatus["Error"] = "error";
+})(ServerResponseStatus || (ServerResponseStatus = {}));
+var getServerResponse = function () {
+    return {
+        result: ServerResponseStatus.Success,
+        data: ['first item', 'second item'],
+    };
+};
+var response = getServerResponse();
+console.log(response);
+// enum/tuple challenge
+var UserRole;
+(function (UserRole) {
+    UserRole[UserRole["Admin"] = 0] = "Admin";
+    UserRole[UserRole["Manager"] = 1] = "Manager";
+    UserRole[UserRole["employee"] = 2] = "employee";
+})(UserRole || (UserRole = {}));
+function createUser(user) {
+    return user;
+}
+var kimmy = createUser({ Id: 32, name: 'kimmy', role: UserRole.Admin, Contact: ['me@gmail.com', '90999404'] });
+//checking for right values
+console.log(kimmy);
 // Memoization means, storing the results of expensive function calls and returning the cached result when the same inputs occur again.
