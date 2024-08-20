@@ -399,20 +399,59 @@ enum UserRole {
 }
 
 type User = {
-  Id: number,
-  name: string,
-  role: UserRole,
-  Contact: [string, string]
-}
+  Id: number;
+  name: string;
+  role: UserRole;
+  Contact: [string, string];
+};
 
 function createUser(user: User): User {
   return user;
 }
 
-const kimmy = createUser({Id: 32, name: 'kimmy', role: UserRole.Admin, Contact: ['me@gmail.com', '40400404']});
+const kimmy = createUser({
+  Id: 32,
+  name: 'kimmy',
+  role: UserRole.Admin,
+  Contact: ['me@gmail.com', '40400404'],
+});
 
 //checking for right values
 console.log(kimmy);
+
+// typescript generics
+function genericFunction<T>(arg: T): T {
+  return arg;
+}
+const stringValue = genericFunction<string>('hello typescript');
+const numberValue = genericFunction<number>(432);
+const numberAndStringArray: readonly (string | number)[] = [stringValue, numberValue]; 
+// numberAndStringArray.push(stringValue); //
+console.log(numberAndStringArray);
+
+async function someFunc(): Promise<string> {
+  return 'this is a promise'
+}
+console.log(someFunc());
+
+//generic challenge 
+//use generics that takes in a number and a value and filles the array with value times number
+
+function arrayFiller<T>(length: number, value: T): T[] {
+  return Array(length).fill(value)
+}
+
+const timmyArray = arrayFiller<string>(5, 'timmy');
+const hunderedArray = arrayFiller<number>(3, 100);
+console.log(timmyArray);
+console.log(hunderedArray);
+
+function pair<T, U>(param1: T, param2: U):[T, U] {
+  return [param1, param2];
+}
+const checkOfPair = pair<number, boolean>(1, true);
+console.log(checkOfPair);
+
 
 
 
